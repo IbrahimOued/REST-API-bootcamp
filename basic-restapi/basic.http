@@ -1,8 +1,40 @@
-GET http://localhost:8080/employee?firstname=Ibrah&lastname=Ouedra
-// GET http://localhost:8080/compute/1/add/2
+# GET http://localhost:8080/employee?firstname=Ibrah&lastname=Ouedra
+# GET http://localhost:8080/compute/1/add/2
 
-//POST http://localhost:8080/ HTTP/1.1
-//content-type: application/json
+# POST http://localhost:8080/ HTTP/1.1
+# content-type: application/json
+# POST http://localhost:8080/product HTTP/1.1
+# content-type: application/json
+
+# {
+#     "id": 2,
+#     "name": "product 2",
+#     "stock": 10,
+#     "price": 2.5
+# }
+
+POST http://localhost:8080/products HTTP/1.1
+content-type: application/json
+
+[{
+    "id": 1,
+    "name": "product 1",
+    "stock": 1,
+    "price": 2
+},
+{
+    "id": 2,
+    "name": "product 2",
+    "stock": 10,
+    "price": 5
+},
+{
+    "id": 3,
+    "name": "product 3",
+    "stock": 30,
+    "price": 7.5
+}]
+
 
 // PUT http://localhost:8080/ HTTP/1.1
 //content-type: application/json

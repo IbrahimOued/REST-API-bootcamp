@@ -2,11 +2,21 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
+
+type Product struct {
+	id    int     `json:"id" binding:required`
+	Name  string  `json:"name" binding:required`
+	Stock int     `json:"stock" binding:required`
+	Price float32 `json:"price" binding:required`
+}
 
 func main() {
 	r := gin.Default()
@@ -36,8 +46,51 @@ func main() {
 	// employee?firstname=ibrah&lastname=oued
 	r.GET("employee", showEmployee)
 
+	// Binding post data
+	r.POST("/product", performProduct)
+	r.POST("/products", performProducts)
+
+	// Read env files
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatalf("Error loading env file")
+	}
+
+	vala := os.Getenv("VALA")
+	valb := os.Getenv("VALB")
+
+	val_a, _ := strconv.ParseInt(vala, 10, 0)
+	val_b, _ := strconv.ParseInt(valb, 10, 0)
+	sum := val_a + val_b
+	fmt.Printf("\n===============\n %d + %d = %d\n", val_a, val_b, sum)
+
 	r.Run() //
 	fmt.Println("Server is running...")
+}
+
+func performProduct(c *gin.Context) {
+	var product Product
+
+	if err := c.BindJSON(&product); err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{
+			"message": "invalid request",
+		})
+		return
+	}
+	c.IndentedJSON(http.StatusOK, product)
+}
+
+func performProducts(c *gin.Context) {
+	var products []Product
+
+	if err := c.BindJSON(&products); err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{
+			"message": "invalid request",
+		})
+		return
+	}
+	c.IndentedJSON(http.StatusOK, products)
+
 }
 
 func getHello(c *gin.Context) {
