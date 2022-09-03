@@ -1,4 +1,5 @@
-// GET http://localhost:8080/
+GET http://localhost:8080/employee?firstname=Ibrah&lastname=Ouedra
+// GET http://localhost:8080/compute/1/add/2
 
 //POST http://localhost:8080/ HTTP/1.1
 //content-type: application/json
