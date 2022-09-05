@@ -46,6 +46,6 @@ func UpdateTodo(db *gorm.DB, todo *Todo) (error error) {
 }
 
 func DeleteTodoById(db *gorm.DB, todo *Todo, id int) (error error) {
-	db.Where("id = ?").Delete(todo)
+	db.Where("id = ?", id).Delete(todo)
 	return nil
 }
