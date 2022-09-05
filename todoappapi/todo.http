@@ -1,0 +1,13 @@
+# POST http://localhost:8080/api/todo HTTP/1.1
+# content-type: application/json
+
+# {
+#     "task": "Buy more loincloth",
+#     "completed": false,
+#     "startdate": "2022-09-05T00:00:00Z",
+#     "enddate": "2022-09-05T14:00:00Z"
+# }
+
+
+
+GET http://localhost:8080/api/todos HTTP/1.1
